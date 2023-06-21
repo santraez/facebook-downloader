@@ -1,0 +1,81 @@
+.container
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  padding: 50px 20px
+  background-color: var(--c-100)
+  h1
+    color: var(--c-00)
+    margin-bottom: 40px
+    text-transform: uppercase
+  input
+    width: 100%
+    min-height: 60px
+    font-size: 25px
+    border: none
+    padding: 0 20px
+    margin-bottom: 30px
+    &:focus
+      outline: none
+  .buttons
+    width: 100%
+    height: auto
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 40px
+    .clear,
+    .search
+      width: auto
+      height: 45px
+      border: none
+      font-weight: 700
+      color: var(--c-00)
+    .clear
+      width: 35%
+      font-size: 18px
+      border-radius: 0 30px 30px 0
+      background-color: #66800b
+    .search
+      width: 62%
+      font-size: 20px
+      border-radius: 30px 0 0 30px
+      background-color: #0771d4
+  .video
+    width: 100%
+    height: 350px
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 20px
+    background-color: white
+    margin-bottom: 40px
+    .play
+      width: 90px
+      height: 90px
+      position: absolute
+      top: 130px
+      left: calc(50% - 45px)
+      z-index: 10
+      svg
+        width: 100%
+        height: 100%
+        color: var(--c-100)
+        opacity: 0.5
+    video
+      max-width: 100%
+      height: 100%
+  .download
+    width: 100%
+    height: 70px
+    border-radius: 50px
+    border: none
+    font-size: 30px
+    font-weight: 700
+    color: var(--c-00)
+    background: var(--gradient-off)
