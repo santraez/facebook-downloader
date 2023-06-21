@@ -6,6 +6,7 @@ import { saveAs } from "file-saver"
 import { FaPlayCircle } from "react-icons/fa"
 import { MdPauseCircle } from "react-icons/md"
 import styles from "./styles.module.sass"
+import Image from "next/image"
 
 export const randomStrings = (length, type="letter") => {
   const letters = "abcdefghijklmnopqrstuvwxyz"
@@ -22,6 +23,7 @@ export const randomStrings = (length, type="letter") => {
 
 export default function Home() {
   const [state, setState] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
   const ref = useRef(null)
   const videoRef = useRef(null)
@@ -32,6 +34,7 @@ export default function Home() {
   const handleSearch = () => {
     const urlEnv = process.env.NEXT_PUBLIC_API_URL
     if (!ref.current.value) return
+    setIsLoading(true)
     setTimeout(() => {
       (async () => {
         try {
@@ -39,9 +42,11 @@ export default function Home() {
           const url = `${urlEnv}?url=${video}`
           const { data } = await axios.get(url)
           setState(data.videoLink)
+          setIsLoading(false)
         } catch (error) {
           console.log(error)
           alert("Intente otra vez")
+          setIsLoading(false)
         }
       })()
     }, 2000)
@@ -66,6 +71,14 @@ export default function Home() {
   }
   return (
     <main className={styles.container}>
+      {(isLoading) && (
+        <div className={styles.loading}>
+          <div className={styles.image}>
+            <Image src="/default.png" width={200} height={200} />
+          </div>
+          <span>Buscando...</span>
+        </div>
+      )}
       <h1>Videos de Facebook</h1>
       <input ref={ref} type="text" placeholder="Ingresa un video de facebook"/>
       <div className={styles.buttons}>
@@ -73,14 +86,12 @@ export default function Home() {
         <button onClick={handleClear} className={styles.clear}>LIMPIAR</button>
       </div>
       <div className={styles.video}>
-        <div className={styles.play}>
-          {
-            (isPlaying) ? (
-              <FaPlayCircle onClick={handlePause} />
-            ) : (
-              <MdPauseCircle onClick={handlePlay} />
-            )
-          }
+        <div className={styles.controls}>
+          {(isPlaying) ? (
+            <FaPlayCircle className={styles.play} onClick={handlePause} />
+          ) : (
+            <MdPauseCircle className={styles.pause} onClick={handlePlay} />
+          )}
         </div>
         <video ref={videoRef} src={state} autoPlay></video>
       </div>
