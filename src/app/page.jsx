@@ -35,7 +35,7 @@ export default function Home() {
       (async () => {
         try {
           const video = ref.current.value
-          const url = `http://localhost:3000/api?url=${video}`
+          const url = `https://facebook-downloader-eight.vercel.app/api?url=${video}`
           const { data } = await axios.get(url)
           setState(data.videoLink)
         } catch (error) {
