@@ -32,14 +32,13 @@ export default function Home() {
     return videoRef.current.play()
   }, [state])
   const handleSearch = () => {
-    const urlEnv = process.env.NEXT_PUBLIC_API_URL
     if (!ref.current.value) return
     setIsLoading(true)
     setTimeout(() => {
       (async () => {
         try {
           const video = ref.current.value
-          const url = `${urlEnv}?url=${video}`
+          const url = `http://localhost:3000/api?url=${video}`
           const { data } = await axios.get(url)
           setState(data.videoLink)
           setIsLoading(false)
