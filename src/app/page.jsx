@@ -73,7 +73,7 @@ export default function Home() {
       {(isLoading) && (
         <div className={styles.loading}>
           <div className={styles.image}>
-            <Image src="/default.png" width={200} height={200} />
+            <Image src="/default.png" width={200} height={200} alt="cat loading" />
           </div>
           <span>Buscando...</span>
         </div>
