@@ -1,4 +1,4 @@
-FROM node:18.16.1-alpine
+FROM node:18.16.1-slim
 
 RUN  apt-get update \
      && apt-get install -y wget gnupg ca-certificates procps libxss1 \

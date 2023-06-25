@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 import puppeteer from "puppeteer"
 
 function delay(ms) {return new Promise(resolve => setTimeout(resolve, ms))}
@@ -25,14 +26,11 @@ export async function GET(request) {
     return video.src
   })
   await browser.close()
-  // return NextResponse.json({ videoLink: src })
-  return new Response({ videoLink: src }, {
-    status: 200,
+  return NextResponse.json({ videoLink: src }, {
     headers: {
-      "content-type": "application/json",
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type"
     }
   })
 }

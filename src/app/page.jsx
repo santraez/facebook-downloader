@@ -21,8 +21,11 @@ export const randomStrings = (length, type="letter") => {
   return result
 }
 
+const origin = (typeof window === "undefined") ? "" : window.location.origin
+
 export default function Home() {
   const [state, setState] = useState(null)
+  console.log("🚀 ~ file: page.jsx:28 ~ Home ~ state:", state)
   const [isLoading, setIsLoading] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
   const ref = useRef(null)
@@ -40,7 +43,8 @@ export default function Home() {
           const video = ref.current.value
           const url = `http://localhost:3000/api?url=${video}`
           const { data } = await axios.get(url)
-          setState(data.videoLink)
+          const newVideoUrl = data.videoLink.replace("https://video.flim9-1.fna.fbcdn.net", origin)
+          setState(newVideoUrl)
           setIsLoading(false)
         } catch (error) {
           console.log(error)
