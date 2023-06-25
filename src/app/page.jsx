@@ -25,7 +25,6 @@ const origin = (typeof window === "undefined") ? "" : window.location.origin
 
 export default function Home() {
   const [state, setState] = useState(null)
-  console.log("🚀 ~ file: page.jsx:28 ~ Home ~ state:", state)
   const [isLoading, setIsLoading] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
   const ref = useRef(null)
